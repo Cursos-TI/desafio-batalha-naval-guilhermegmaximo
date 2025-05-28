@@ -1,0 +1,80 @@
+#include <stdio.h>
+
+#define TAM 5
+
+// Função para exibir qualquer matriz
+void exibirMatriz(int matriz[TAM][TAM]) {
+    for (int y = 0; y < TAM; y++) {
+        for (int x = 0; x < TAM; x++) {
+            printf("%d ", matriz[y][x]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+int main() {
+    // 1️⃣ Tabuleiro dos navios
+    int tabuleiro[TAM][TAM] = {0};
+
+    // 🚢 Navio Vertical
+    int colunaNavioVertical = 1;
+    int linhaInicioVertical = 0;
+    int tamanhoVertical = 3;
+
+    printf("Coordenadas do Navio Vertical:\n");
+    for (int i = 0; i < tamanhoVertical; i++) {
+        int linha = linhaInicioVertical + i;
+        tabuleiro[linha][colunaNavioVertical] = 1;
+        printf("(%d, %d)\n", linha, colunaNavioVertical);
+    }
+
+    // 🚢 Navio Horizontal
+    int linhaNavioHorizontal = 4;
+    int colunaInicioHorizontal = 0;
+    int tamanhoHorizontal = 4;
+
+    printf("\nCoordenadas do Navio Horizontal:\n");
+    for (int i = 0; i < tamanhoHorizontal; i++) {
+        int coluna = colunaInicioHorizontal + i;
+        tabuleiro[linhaNavioHorizontal][coluna] = 1;
+        printf("(%d, %d)\n", linhaNavioHorizontal, coluna);
+    }
+
+    // Exibir o tabuleiro com navios
+    printf("\nTabuleiro com os Navios:\n");
+    exibirMatriz(tabuleiro);
+
+    // 2️⃣ Habilidades Especiais
+
+    // Matriz para o Cone 🔺
+    int cone[TAM][TAM] = {0};
+    // Ponto central do cone
+    cone[2][2] = 1;
+    cone[3][1] = 1; cone[3][2] = 1; cone[3][3] = 1;
+    cone[4][0] = 1; cone[4][1] = 1; cone[4][2] = 1; cone[4][3] = 1; cone[4][4] = 1;
+
+    printf("Área Atingida - Cone 🔺:\n");
+    exibirMatriz(cone);
+
+    // Matriz para a Cruz ❌
+    int cruz[TAM][TAM] = {0};
+    for (int i = 0; i < TAM; i++) {
+        cruz[2][i] = 1; // Linha central
+        cruz[i][2] = 1; // Coluna central
+    }
+
+    printf("Área Atingida - Cruz ❌:\n");
+    exibirMatriz(cruz);
+
+    // Matriz para o Octaedro ◇
+    int octaedro[TAM][TAM] = {0};
+    octaedro[2][2] = 1;                 // Centro
+    octaedro[1][2] = 1; octaedro[3][2] = 1; // Vertical
+    octaedro[2][1] = 1; octaedro[2][3] = 1; // Horizontal
+
+    printf("Área Atingida - Octaedro ◇:\n");
+    exibirMatriz(octaedro);
+
+    return 0;
+}
